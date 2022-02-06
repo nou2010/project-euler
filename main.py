@@ -66,11 +66,49 @@ def q4():
         palindromes.append(p)
   return max(palindromes)
 
+def gcf(a, b):
+  #Euclid's method
+  r=a%b
+  while r:
+      a=b
+      b=r
+      r=a%b
+  return b
+
+def lcm(a, b):
+  # ab / gcf(a, b)
+  return int((a * b) / gcf(a, b)) 
 
 def q5():
-  
-print("Problem 1 answer: ", q1(1000))
-print("Problem 2 answer: ", q2(4000000))
-print("Problem 3 answer: ", q3(600851475143))
-print("Problem 4 answer: ", q4())
-print("Problem 5 answer: ", q5())
+  #Least common multiple of numbers 1 through 20
+  rlist = list(range(1, 20))
+  templcm = 1
+  for i in rlist: 
+    templcm = lcm(i, templcm)
+  return templcm
+
+def q6(n):
+  #Difference between square of sum of natural numbers and sum of natural number squared
+  nlist = list(range(1, n))
+  squarelistsum = sum([i ** 2 for i in nlist])
+  squaredsum = sum(nlist) ** 2
+  return squaredsum - squarelistsum
+
+
+def q7(n):
+  #a little cheat https://codereview.stackexchange.com/questions/102507/finding-the-10001st-prime
+    primes = [2]
+    attempt = 3
+    while len(primes) < n:
+        if all(attempt % prime != 0 for prime in primes):
+            primes.append(attempt)
+        attempt += 2
+    return primes[-1]
+
+#print("Problem 1 answer: ", q1(1000))
+#print("Problem 2 answer: ", q2(4000000))
+#print("Problem 3 answer: ", q3(600851475143))
+#print("Problem 4 answer: ", q4())
+#print("Problem 5 answer: ", q5())
+#print("Problem 6 answer: ", q6(100))
+print("Problem 7 answer: ", q7(10001))
